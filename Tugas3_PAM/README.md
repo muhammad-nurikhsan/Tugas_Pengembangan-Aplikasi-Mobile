@@ -58,14 +58,11 @@ Komponen yang diimplementasikan:
 
 ## Screenshot
 
-### Tampilan Awal
-`[Screenshot tampilan awal aplikasi]`
-
-### Info Ditampilkan
-`[Screenshot saat card info terlihat]`
+### Tampilan
+<img width="553" height="962" alt="Image" src="https://github.com/user-attachments/assets/fc00c99e-ce5d-43a5-8701-66cbc7b97922" />
 
 ### Info Disembunyikan
-`[Screenshot saat card info tersembunyi]`
+<img width="572" height="960" alt="Image" src="https://github.com/user-attachments/assets/99fb2995-a095-406a-8f87-66183f03401b" />
 
 ---
 
