@@ -1,4 +1,4 @@
-# Profile App — State Management & MVVM
+# Profile App - State Management & MVVM
 
 **Nama:** Muhammad Nurikhsan  
 **NIM:** 123140057  
@@ -17,9 +17,9 @@ Pengembangan Profile App dari Pertemuan 3 menggunakan arsitektur MVVM dan State 
 - Animated dark mode toggle
 
 Struktur folder sesuai ketentuan:
-- `data/` — ProfileUiState data class
-- `viewmodel/` — ProfileViewModel dengan StateFlow
-- `ui/` — ProfileScreen dan EditProfileForm
+- `data/` : ProfileUiState data class
+- `viewmodel/` : ProfileViewModel dengan StateFlow
+- `ui/` : ProfileScreen dan EditProfileForm
 
 ---
 
@@ -49,7 +49,7 @@ Struktur folder sesuai ketentuan:
 ✔ `ProfileUiState` data class dengan semua state UI  
 ✔ `_uiState.update { it.copy(...) }` untuk update state immutable  
 ✔ `collectAsState()` untuk observe StateFlow di Composable  
-✔ `LabeledTextField` stateless — state hoisting dengan `value` + `onValueChange`  
+✔ `LabeledTextField` stateless - state hoisting dengan `value` + `onValueChange`  
 ✔ `saveProfile(name, bio)` di ViewModel untuk update dari UI  
 ✔ `isDarkMode` disimpan di ViewModel, tidak di Composable  
 ✔ `animateColorAsState` untuk transisi dark mode yang smooth (**Bonus +10%**)  
