@@ -2,7 +2,8 @@
 
 **Nama:** Muhammad Nurikhsan  
 **NIM:** 123140057  
-**Program Studi:** Teknik Informatika  
+**Program Studi:** Teknik Informatika
+**Kelas:** Pengembangan Aplikasi Mobile RB
 
 ---
 
