@@ -1,27 +1,69 @@
-This is a Kotlin Multiplatform project targeting Android.
+# My Profile App
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
-
-### Build and Run Android Application
-
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+**Nama:** Muhammad Nurikhsan  
+**NIM:** 123140057  
+**Program Studi:** Teknik Informatika  
+**Kelas:** Pengembangan Aplikasi Mobile RB
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Deskripsi
+
+Aplikasi Compose Multiplatform yang menampilkan halaman profil pengguna menggunakan paradigma UI deklaratif, mencakup:
+
+- Composable Functions yang reusable
+- Basic Layouts (Column, Row, Box)
+- Modifiers untuk styling dan positioning
+- Komponen UI (Card, Button, Icon, Text)
+- AnimatedVisibility untuk transisi konten
+
+Komponen yang diimplementasikan:
+- ProfileHeader
+- InfoItem
+- SocialButton
+
+---
+
+## Cara Menjalankan
+
+1. Clone atau download repository
+2. Buka folder `Tugas3_PAM` di Android Studio
+3. Tunggu Gradle Sync selesai
+4. Jalankan emulator (Pixel API 28 atau lebih tinggi)
+5. Klik Run
+
+---
+
+## Cara Menggunakan
+
+- Buka aplikasi → tampil halaman profil dengan foto, nama, dan title
+- Scroll ke bawah → lihat informasi Email, Phone, dan Location
+- Tekan **Sembunyikan Info** → card informasi hilang dengan animasi
+- Tekan **Tampilkan Info** → card informasi muncul kembali dengan animasi
+- Tombol **Share Profile** dan **Edit Profile** tersedia di bagian bawah
+
+---
+
+## Implementasi Sesuai Ketentuan
+
+✔ `ProfileHeader` : Box + Column + Image circular + Text nama & title  
+✔ `InfoItem` : Row + Icon + Column (label & value), dipakai 3x  
+✔ `SocialButton` : OutlinedButton + Icon, reusable dengan parameter  
+✔ Layout: `Column`, `Row`, `Box` digunakan di seluruh komponen  
+✔ `Card` dengan elevation untuk container informasi  
+✔ `Modifier` : padding, fillMaxWidth, size, clip, border, background  
+✔ `AnimatedVisibility` untuk toggle tampilan info (**Bonus +10%**)  
+
+---
+
+## Screenshot
+
+### Tampilan
+<img width="553" height="962" alt="Image" src="https://github.com/user-attachments/assets/fc00c99e-ce5d-43a5-8701-66cbc7b97922" />
+
+### Info Disembunyikan
+<img width="572" height="960" alt="Image" src="https://github.com/user-attachments/assets/99fb2995-a095-406a-8f87-66183f03401b" />
+
+---
+
+Project berjalan normal dan seluruh fitur sesuai dengan deskripsi tugas Pertemuan 3.
