@@ -29,7 +29,7 @@ Struktur folder sesuai ketentuan:
 2. Buka folder `Tugas4_PAM` di Android Studio
 3. Tunggu Gradle Sync selesai
 4. Jalankan emulator (Pixel API 28 atau lebih tinggi)
-5. Klik Run (▶)
+5. Klik Run 
 
 ---
 
@@ -61,13 +61,15 @@ Struktur folder sesuai ketentuan:
 ## Screenshot
 
 ### Tampilan Profile (Light Mode)
-`[Screenshot tampilan awal light mode]`
+<img width="505" height="963" alt="Image" src="https://github.com/user-attachments/assets/ab997b69-2049-4076-8560-7cb275fcce64" />
 
 ### Form Edit Profile
-`[Screenshot saat form edit terbuka]`
+<img width="520" height="968" alt="Image" src="https://github.com/user-attachments/assets/bb82db93-0842-4ab8-8062-9146524b1e3e" />
+<img width="544" height="953" alt="Image" src="https://github.com/user-attachments/assets/cdcadcdc-ec82-4923-99d2-8fa28664a41d" />
+<img width="504" height="960" alt="Image" src="https://github.com/user-attachments/assets/a0faaa8b-181d-4295-adc9-e6604359594e" />
 
 ### Tampilan Dark Mode
-`[Screenshot saat dark mode aktif]`
+<img width="525" height="952" alt="Image" src="https://github.com/user-attachments/assets/4e9009a4-32ed-4bd8-add5-b50e5d0a7656" />
 
 ---
 
