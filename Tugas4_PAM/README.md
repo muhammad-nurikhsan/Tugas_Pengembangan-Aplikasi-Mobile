@@ -1,27 +1,74 @@
-This is a Kotlin Multiplatform project targeting Android.
+# Profile App — State Management & MVVM
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
-
-### Build and Run Android Application
-
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+**Nama:** Muhammad Nurikhsan  
+**NIM:** 123140057  
+**Program Studi:** Teknik Informatika  
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Deskripsi
+
+Pengembangan Profile App dari Pertemuan 3 menggunakan arsitektur MVVM dan State Management dengan Compose Multiplatform, mencakup:
+
+- MVVM Pattern (Model - View - ViewModel)
+- StateFlow untuk reactive UI state
+- State Hoisting pada TextField
+- Recomposition otomatis saat state berubah
+- Animated dark mode toggle
+
+Struktur folder sesuai ketentuan:
+- `data/` — ProfileUiState data class
+- `viewmodel/` — ProfileViewModel dengan StateFlow
+- `ui/` — ProfileScreen dan EditProfileForm
+
+---
+
+## Cara Menjalankan
+
+1. Clone atau download repository
+2. Buka folder `Tugas4_PAM` di Android Studio
+3. Tunggu Gradle Sync selesai
+4. Jalankan emulator (Pixel API 28 atau lebih tinggi)
+5. Klik Run (▶)
+
+---
+
+## Cara Menggunakan
+
+- Buka aplikasi → tampil halaman profil lengkap
+- Tekan **Edit Profile** → form edit muncul dengan animasi
+- Ubah nama atau bio → tekan **Simpan** → profil terupdate langsung
+- Tekan **Batal** → form tertutup tanpa menyimpan perubahan
+- Toggle switch di atas → tema berganti antara gelap dan terang secara smooth
+
+---
+
+## Implementasi Sesuai Ketentuan
+
+✔ `ProfileViewModel` dengan `MutableStateFlow` dan `StateFlow`  
+✔ `ProfileUiState` data class dengan semua state UI  
+✔ `_uiState.update { it.copy(...) }` untuk update state immutable  
+✔ `collectAsState()` untuk observe StateFlow di Composable  
+✔ `LabeledTextField` stateless — state hoisting dengan `value` + `onValueChange`  
+✔ `saveProfile(name, bio)` di ViewModel untuk update dari UI  
+✔ `isDarkMode` disimpan di ViewModel, tidak di Composable  
+✔ `animateColorAsState` untuk transisi dark mode yang smooth (**Bonus +10%**)  
+✔ `AnimatedVisibility` untuk form edit yang muncul/sembunyi  
+✔ Struktur folder: `ui/`, `viewmodel/`, `data/`  
+
+---
+
+## Screenshot
+
+### Tampilan Profile (Light Mode)
+`[Screenshot tampilan awal light mode]`
+
+### Form Edit Profile
+`[Screenshot saat form edit terbuka]`
+
+### Tampilan Dark Mode
+`[Screenshot saat dark mode aktif]`
+
+---
+
+Project berjalan normal dan seluruh fitur sesuai dengan deskripsi tugas Pertemuan 4.
