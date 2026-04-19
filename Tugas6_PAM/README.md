@@ -29,7 +29,7 @@ Fitur utama yang diterapkan meliputi:
 
 ## API yang Digunakan
 
-**DummyJSON** — `https://dummyjson.com`
+**DummyJSON** - `https://dummyjson.com`
 
 | Endpoint | Method | Deskripsi |
 |---|---|---|
