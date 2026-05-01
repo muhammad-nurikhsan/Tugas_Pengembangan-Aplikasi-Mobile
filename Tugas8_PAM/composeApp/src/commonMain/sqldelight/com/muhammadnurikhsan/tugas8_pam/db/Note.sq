@@ -1,0 +1,42 @@
+CREATE TABLE NoteEntity (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    title       TEXT    NOT NULL,
+    content     TEXT    NOT NULL,
+    is_favorite INTEGER NOT NULL DEFAULT 0,
+    created_at  INTEGER NOT NULL,
+    updated_at  INTEGER NOT NULL
+);
+
+selectAll:
+SELECT * FROM NoteEntity ORDER BY updated_at DESC;
+
+selectById:
+SELECT * FROM NoteEntity WHERE id = ?;
+
+selectByQuery:
+SELECT * FROM NoteEntity
+WHERE title LIKE ? OR content LIKE ?
+ORDER BY updated_at DESC;
+
+selectFavorites:
+SELECT * FROM NoteEntity WHERE is_favorite = 1 ORDER BY updated_at DESC;
+
+insert:
+INSERT INTO NoteEntity(title, content, is_favorite, created_at, updated_at)
+VALUES (?, ?, 0, ?, ?);
+
+update:
+UPDATE NoteEntity
+SET title = ?, content = ?, updated_at = ?
+WHERE id = ?;
+
+toggleFavorite:
+UPDATE NoteEntity
+SET is_favorite = CASE WHEN is_favorite = 1 THEN 0 ELSE 1 END
+WHERE id = ?;
+
+delete:
+DELETE FROM NoteEntity WHERE id = ?;
+
+countAll:
+SELECT COUNT(*) FROM NoteEntity;
