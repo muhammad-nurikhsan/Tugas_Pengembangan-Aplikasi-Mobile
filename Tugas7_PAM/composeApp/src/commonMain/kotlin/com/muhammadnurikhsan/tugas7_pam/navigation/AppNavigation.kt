@@ -1,14 +1,18 @@
 package com.muhammadnurikhsan.tugas7_pam.navigation
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -36,16 +40,16 @@ fun AppNavigation(
 ) {
     val noteViewModel     = remember { NoteViewModel(noteRepository) }
     val settingsViewModel = remember { SettingsViewModel(settingsRepository) }
-
-    val navController = rememberNavController()
-    val currentRoute  = navController.currentBackStackEntryAsState().value?.destination?.route
+    val navController     = rememberNavController()
+    val currentRoute      = navController.currentBackStackEntryAsState().value?.destination?.route
 
     Scaffold(
         bottomBar = {
             if (currentRoute in bottomNavRoutes) {
-                BottomNavigationBar(navController = navController)
+                MinimalBottomNav(navController = navController)
             }
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
         NavHost(
             navController    = navController,
@@ -59,27 +63,23 @@ fun AppNavigation(
                     onAddClick  = { navController.navigate(Screen.AddNote.route) }
                 )
             }
-
             composable(Screen.Favorites.route) {
                 FavoritesScreen(
                     viewModel   = noteViewModel,
                     onNoteClick = { id -> navController.navigate(Screen.NoteDetail.createRoute(id)) }
                 )
             }
-
             composable(Screen.Profile.route) {
                 ProfileScreen(settingsViewModel = settingsViewModel)
             }
-
             composable(Screen.Settings.route) {
                 SettingsScreen(viewModel = settingsViewModel)
             }
-
             composable(
                 route     = Screen.NoteDetail.route,
                 arguments = listOf(navArgument("noteId") { type = NavType.LongType })
-            ) { backStackEntry ->
-                val noteId = backStackEntry.arguments?.getLong("noteId") ?: return@composable
+            ) { back ->
+                val noteId = back.arguments?.getLong("noteId") ?: return@composable
                 NoteDetailScreen(
                     viewModel = noteViewModel,
                     noteId    = noteId,
@@ -87,77 +87,63 @@ fun AppNavigation(
                     onEdit    = { navController.navigate(Screen.EditNote.createRoute(noteId)) }
                 )
             }
-
             composable(Screen.AddNote.route) {
-                AddNoteScreen(
-                    viewModel = noteViewModel,
-                    onBack    = { navController.popBackStack() }
-                )
+                AddNoteScreen(viewModel = noteViewModel, onBack = { navController.popBackStack() })
             }
-
             composable(
                 route     = Screen.EditNote.route,
                 arguments = listOf(navArgument("noteId") { type = NavType.LongType })
-            ) { backStackEntry ->
-                val noteId = backStackEntry.arguments?.getLong("noteId") ?: return@composable
-                EditNoteScreen(
-                    viewModel = noteViewModel,
-                    noteId    = noteId,
-                    onBack    = { navController.popBackStack() }
-                )
+            ) { back ->
+                val noteId = back.arguments?.getLong("noteId") ?: return@composable
+                EditNoteScreen(viewModel = noteViewModel, noteId = noteId, onBack = { navController.popBackStack() })
             }
         }
     }
 }
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+fun MinimalBottomNav(navController: NavController) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
-    NavigationBar {
-        NavigationBarItem(
-            selected = currentRoute == Screen.NoteList.route,
-            onClick  = {
-                navController.navigate(Screen.NoteList.route) {
-                    popUpTo(Screen.NoteList.route) { saveState = true }
-                    launchSingleTop = true; restoreState = true
-                }
-            },
-            icon  = { Icon(Icons.Default.Home, null) },
-            label = { Text("Notes") }
-        )
-        NavigationBarItem(
-            selected = currentRoute == Screen.Favorites.route,
-            onClick  = {
-                navController.navigate(Screen.Favorites.route) {
-                    popUpTo(Screen.NoteList.route) { saveState = true }
-                    launchSingleTop = true; restoreState = true
-                }
-            },
-            icon  = { Icon(Icons.Default.Favorite, null) },
-            label = { Text("Favorit") }
-        )
-        NavigationBarItem(
-            selected = currentRoute == Screen.Profile.route,
-            onClick  = {
-                navController.navigate(Screen.Profile.route) {
-                    popUpTo(Screen.NoteList.route) { saveState = true }
-                    launchSingleTop = true; restoreState = true
-                }
-            },
-            icon  = { Icon(Icons.Default.Person, null) },
-            label = { Text("Profil") }
-        )
-        NavigationBarItem(
-            selected = currentRoute == Screen.Settings.route,
-            onClick  = {
-                navController.navigate(Screen.Settings.route) {
-                    popUpTo(Screen.NoteList.route) { saveState = true }
-                    launchSingleTop = true; restoreState = true
-                }
-            },
-            icon  = { Icon(Icons.Default.Settings, null) },
-            label = { Text("Settings") }
-        )
+    NavigationBar(
+        containerColor = Color(0xFF111111),
+        tonalElevation = 0.dp
+    ) {
+        listOf(
+            Triple(Screen.NoteList.route,  Icons.Outlined.GridView,  "notes"),
+            Triple(Screen.Favorites.route, Icons.Filled.Star,        "starred"),
+            Triple(Screen.Profile.route,   Icons.Filled.Person,      "profile"),
+            Triple(Screen.Settings.route,  Icons.Filled.Settings,    "settings"),
+        ).forEach { (route, icon, label) ->
+            val selected = currentRoute == route
+            NavigationBarItem(
+                selected = selected,
+                onClick  = {
+                    navController.navigate(route) {
+                        popUpTo(Screen.NoteList.route) { saveState = true }
+                        launchSingleTop = true
+                        restoreState    = true
+                    }
+                },
+                icon = {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = label,
+                        modifier = Modifier.size(20.dp),
+                        tint = if (selected) Color.White else Color(0xFF444444)
+                    )
+                },
+                label = {
+                    Text(
+                        text     = label,
+                        fontSize = 10.sp,
+                        color    = if (selected) Color.White else Color(0xFF444444)
+                    )
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    indicatorColor = Color(0xFF1E1E1E)
+                )
+            )
+        }
     }
 }
