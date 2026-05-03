@@ -23,7 +23,7 @@ Fitur AI yang diterapkan meliputi:
 
 | Endpoint | Method | Deskripsi |
 |---|---|---|
-| `/models/gemini-2.0-flash:generateContent` | POST | Generate konten AI (chat & summarize) |
+| `/models/gemini-2.5-flash:generateContent` | POST | Generate konten AI (chat & summarize) |
 
 ---
 
@@ -62,7 +62,7 @@ AIViewModel
 ↓
 GeminiService  ←  ApiConfig (BuildConfig)
 ↓
-Gemini 2.0 Flash API
+Gemini 2.5 Flash API
 
 ---
 
@@ -86,8 +86,8 @@ Gemini 2.0 Flash API
 <!-- Tambahkan screenshot error snackbar -->
 
 ---
-
 ## Struktur Project
+```
 Tugas9_PAM/
 └── composeApp/src/
 ├── androidMain/kotlin/com/muhammadnurikhsan/tugas9_pam/
@@ -130,6 +130,7 @@ Tugas9_PAM/
 └── di/
 └── AppModule.kt
 
+```
 ---
 
 ## Setup
