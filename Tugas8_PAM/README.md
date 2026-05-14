@@ -1,10 +1,9 @@
-# Notes App — Tugas 8 PAM
+# Notes App 
 
-**Nama:** Muhammad Nurikhsan
-**NIM:** 123140057
-**Program Studi:** Teknik Informatika
-**Kelas:** Pengembangan Aplikasi Mobile RB
-**Minggu:** 8
+**Nama:** Muhammad Nurikhsan  
+**NIM:** 123140057  
+**Program Studi:** Teknik Informatika  
+**Kelas:** Pengembangan Aplikasi Mobile RB  
 
 ---
 
@@ -18,11 +17,11 @@ Pengembangan dari Tugas 7 dengan penambahan fitur **Dependency Injection (Koin)*
 
 Semua fitur Tugas 7, ditambah:
 
-- **Dependency Injection** menggunakan Koin — ViewModel dan semua dependency di-inject otomatis
-- **Network Monitor** — banner otomatis muncul ketika koneksi internet terputus
-- **Device Info** — menampilkan nama perangkat, versi OS, versi aplikasi, dan jenis layar (tablet/smartphone)
-- **Battery Info** — menampilkan persentase baterai, status charging, dan progress bar dengan warna dinamis
-- **Floating Bottom Navigation** — bottom nav berbentuk pill dengan rounded corner dan shadow
+- **Dependency Injection** menggunakan Koin - ViewModel dan semua dependency di-inject otomatis
+- **Network Monitor** - banner otomatis muncul ketika koneksi internet terputus
+- **Device Info** - menampilkan nama perangkat, versi OS, versi aplikasi, dan jenis layar (tablet/smartphone)
+- **Battery Info** - menampilkan persentase baterai, status charging, dan progress bar dengan warna dinamis
+- **Floating Bottom Navigation** - bottom nav berbentuk pill dengan rounded corner dan shadow
 - Desain UI diperbarui ke tema terang (*light*) yang lebih bersih
 
 ---
