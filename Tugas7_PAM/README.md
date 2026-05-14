@@ -1,28 +1,23 @@
-# Notes App
-
+# Notes App - Local Data Storage
 **Nama:** Muhammad Nurikhsan  
 **NIM:** 123140057  
 **Program Studi:** Teknik Informatika  
-**Kelas:** Pengembangan Aplikasi Mobile RB 
-**Minggu:** 7
+**Kelas:** Pengembangan Aplikasi Mobile RB  
 
 ---
 
 ## Deskripsi
 
-Aplikasi catatan pribadi berbasis **Kotlin Multiplatform** dengan target Android. Data catatan disimpan secara lokal menggunakan **SQLDelight**, sehingga aplikasi berjalan sepenuhnya secara *offline-first*. Preferensi pengguna (tema dan urutan catatan) disimpan menggunakan **Multiplatform Settings**.
+Project ini merupakan implementasi aplikasi Notes App menggunakan Kotlin Multiplatform dengan fokus pada penyimpanan data lokal menggunakan SQLDelight dan Multiplatform Settings.
 
----
-
-## Fitur
-
-- Tambah, edit, dan hapus catatan
-- Tandai catatan sebagai favorit
-- Pencarian catatan secara real-time (by judul & isi)
-- Halaman daftar favorit
-- Pengaturan tema (System / Light / Dark) dan urutan catatan (Terbaru / Terlama / Judul A-Z)
-- Halaman profil mahasiswa
-- Bottom navigation bar dengan 4 tab: Notes, Starred, Profile, Settings
+Fitur utama yang diterapkan meliputi:
+- SQLDelight database untuk menyimpan catatan secara lokal (offline-first)
+- CRUD operations (Create, Read, Update, Delete) untuk catatan
+- Fitur favorit dengan toggle `is_favorite`
+- Search functionality real-time berdasarkan judul dan isi catatan
+- Settings screen dengan Multiplatform Settings (tema & urutan catatan)
+- UI states yang proper (Loading, Empty, Content, Error)
+- Bottom navigation dengan 4 tab: Notes, Starred, Profile, Settings
 
 ---
 
@@ -40,54 +35,29 @@ Aplikasi catatan pribadi berbasis **Kotlin Multiplatform** dengan target Android
 
 ---
 
-## Arsitektur
+## Fitur Aplikasi
 
-Aplikasi menggunakan pola **MVVM (Model-View-ViewModel)** dengan pemisahan layer yang jelas:
+### 1. Notes List
+Menampilkan daftar catatan dari database lokal, dilengkapi search bar real-time dan tombol tambah catatan. Catatan pertama ditampilkan dengan warna aksen berbeda sebagai highlight.
 
-```
-UI Layer (Screens)
-      ↓
-ViewModel Layer (NoteViewModel, SettingsViewModel)
-      ↓
-Repository Layer (NoteRepository, SettingsRepository)
-      ↓
-Data Layer (SQLDelight DB, Multiplatform Settings)
-```
+### 2. Add / Edit Note
+Form untuk membuat catatan baru atau mengedit catatan yang sudah ada, dengan validasi judul tidak boleh kosong sebelum disimpan.
 
-### Struktur Direktori
+### 3. Note Detail
+Halaman detail menampilkan judul, tanggal terakhir diperbarui, dan isi catatan lengkap. Tersedia tombol toggle favorit dan edit di TopBar.
 
-```
-composeApp/src/
-├── androidMain/kotlin/com/muhammadnurikhsan/tugas7_pam/
-│   ├── MainActivity.kt
-│   ├── Platform.kt
-│   └── database/
-│       └── DatabaseDriverFactory.kt
-└── commonMain/kotlin/com/muhammadnurikhsan/tugas7_pam/
-    ├── App.kt
-    ├── data/
-    │   ├── NoteRepository.kt
-    │   ├── NotesUiState.kt
-    │   └── SettingsRepository.kt
-    ├── viewmodel/
-    │   ├── NoteViewModel.kt
-    │   └── SettingsViewModel.kt
-    ├── navigation/
-    │   ├── AppNavigation.kt
-    │   └── Screen.kt
-    └── screens/
-        ├── NoteListScreen.kt
-        ├── NoteDetailScreen.kt
-        ├── AddNoteScreen.kt
-        ├── EditNoteScreen.kt
-        ├── FavoritesScreen.kt
-        ├── ProfileScreen.kt
-        └── SettingsScreen.kt
-```
+### 4. Favorites Screen
+Menampilkan hanya catatan yang ditandai sebagai favorit. Menampilkan empty state dengan ikon dan teks panduan jika belum ada catatan favorit.
+
+### 5. Settings Screen
+Menyimpan preferensi tema (Ikuti Sistem / Terang / Gelap) dan urutan catatan (Terbaru Dulu / Terlama Dulu / Judul A-Z) menggunakan Multiplatform Settings yang persisten antar sesi.
+
+### 6. Profile Screen
+Menampilkan informasi mahasiswa dan informasi aplikasi secara statis.
 
 ---
 
-## Skema Database
+## Database Schema
 
 ```sql
 CREATE TABLE NoteEntity (
@@ -104,30 +74,59 @@ Query yang tersedia: `selectAll`, `selectById`, `selectByQuery`, `selectFavorite
 
 ---
 
-## Navigasi
+## Video Demo
 
-| Screen | Route | Deskripsi |
-|---|---|---|
-| NoteListScreen | `note_list` | Halaman utama daftar catatan |
-| FavoritesScreen | `favorites` | Daftar catatan favorit |
-| ProfileScreen | `profile` | Profil mahasiswa |
-| SettingsScreen | `settings` | Pengaturan aplikasi |
-| NoteDetailScreen | `note_detail/{noteId}` | Detail catatan |
-| AddNoteScreen | `add_note` | Tambah catatan baru |
-| EditNoteScreen | `edit_note/{noteId}` | Edit catatan |
+[Link Video Demo](https://drive.google.com/file/d/xxx/view?usp=sharing)
 
 ---
 
-## Build & Run
+## Screenshot
 
-**macOS / Linux:**
-```shell
-./gradlew :composeApp:assembleDebug
+### Notes List
+<!-- Tambahkan screenshot Notes List -->
+
+### Add Note
+<!-- Tambahkan screenshot Add Note -->
+
+### Note Detail
+<!-- Tambahkan screenshot Note Detail -->
+
+### Favorites Screen
+<!-- Tambahkan screenshot Favorites -->
+
+### Settings Screen
+<!-- Tambahkan screenshot Settings -->
+
+---
+
+## Struktur Project
+
 ```
-
-**Windows:**
-```shell
-.\gradlew.bat :composeApp:assembleDebug
+Tugas7_PAM/
+└── composeApp/src/
+    ├── androidMain/kotlin/com/muhammadnurikhsan/tugas7_pam/
+    │   ├── MainActivity.kt
+    │   ├── Platform.kt
+    │   └── database/
+    │       └── DatabaseDriverFactory.kt
+    └── commonMain/kotlin/com/muhammadnurikhsan/tugas7_pam/
+        ├── App.kt
+        ├── data/
+        │   ├── NoteRepository.kt
+        │   ├── NotesUiState.kt
+        │   └── SettingsRepository.kt
+        ├── viewmodel/
+        │   ├── NoteViewModel.kt
+        │   └── SettingsViewModel.kt
+        ├── navigation/
+        │   ├── AppNavigation.kt
+        │   └── Screen.kt
+        └── screens/
+            ├── NoteListScreen.kt
+            ├── NoteDetailScreen.kt
+            ├── AddNoteScreen.kt
+            ├── EditNoteScreen.kt
+            ├── FavoritesScreen.kt
+            ├── ProfileScreen.kt
+            └── SettingsScreen.kt
 ```
-
-**Requirement:** Android SDK 24+ (minSdk), target SDK 34.
