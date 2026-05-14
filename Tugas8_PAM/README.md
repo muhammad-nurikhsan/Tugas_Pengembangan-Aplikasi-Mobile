@@ -1,5 +1,4 @@
-# Notes App 
-
+# Notes App - Platform-Specific Features
 **Nama:** Muhammad Nurikhsan  
 **NIM:** 123140057  
 **Program Studi:** Teknik Informatika  
@@ -9,20 +8,16 @@
 
 ## Deskripsi
 
-Pengembangan dari Tugas 7 dengan penambahan fitur **Dependency Injection (Koin)**, **Platform API** (device info, network monitor, battery info), dan peningkatan tampilan UI. Arsitektur lebih modular karena seluruh dependency dikelola oleh Koin, bukan diinisialisasi manual.
+Project ini merupakan pengembangan dari Tugas 7 (Notes App) dengan menambahkan Dependency Injection menggunakan Koin dan Platform-Specific APIs menggunakan pola expect/actual.
 
----
-
-## Fitur
-
-Semua fitur Tugas 7, ditambah:
-
-- **Dependency Injection** menggunakan Koin - ViewModel dan semua dependency di-inject otomatis
-- **Network Monitor** - banner otomatis muncul ketika koneksi internet terputus
-- **Device Info** - menampilkan nama perangkat, versi OS, versi aplikasi, dan jenis layar (tablet/smartphone)
-- **Battery Info** - menampilkan persentase baterai, status charging, dan progress bar dengan warna dinamis
-- **Floating Bottom Navigation** - bottom nav berbentuk pill dengan rounded corner dan shadow
-- Desain UI diperbarui ke tema terang (*light*) yang lebih bersih
+Fitur utama yang diterapkan meliputi:
+- Dependency Injection dengan Koin — seluruh dependency di-inject secara otomatis
+- DeviceInfo dengan expect/actual — menampilkan nama perangkat, versi OS, versi app, dan jenis layar
+- NetworkMonitor dengan expect/actual — mendeteksi koneksi internet secara reaktif menggunakan Flow
+- BatteryInfo dengan expect/actual — menampilkan level baterai dan status charging
+- Network status indicator animasi di main screen saat koneksi terputus
+- Device info, status internet, dan status baterai tampil di Settings screen
+- Floating bottom navigation dengan desain pill dan shadow
 
 ---
 
@@ -36,188 +31,122 @@ Semua fitur Tugas 7, ditambah:
 | Multiplatform Settings | 1.1.1 | Penyimpanan preferensi |
 | Koin Core | 3.5.3 | Dependency Injection (commonMain) |
 | Koin Android | 3.5.3 | DI untuk Android |
-| Koin Compose | 1.0.3 | DI di Composable (`koinViewModel`, `koinInject`) |
+| Koin Compose | 1.0.3 | `koinViewModel` & `koinInject` di Composable |
 | Jetpack Navigation Compose | 2.7.0-alpha07 | Navigasi antar screen |
 | Lifecycle ViewModel Compose | 2.8.3 | State management |
 | kotlinx-datetime | 0.6.0 | Pengelolaan timestamp |
 
 ---
 
-## Arsitektur
+## Fitur Aplikasi
 
-```
-UI Layer (Screens)
-      ↓
-ViewModel Layer          ←  Koin inject
-      ↓
-Repository Layer         ←  Koin inject
-      ↓
-Data Layer (SQLDelight, Settings)
-      ↓
-Platform Layer (DeviceInfo, NetworkMonitor, BatteryInfo)  ←  expect/actual
-```
+### 1. Dependency Injection (Koin)
+Seluruh dependency (database, repository, ViewModel, platform services) dikelola Koin. ViewModel di-inject dengan `koinViewModel()` dan platform service dengan `koinInject()`.
 
-Koin diinisialisasi di `MyApplication.onCreate()` dengan dua modul:
+### 2. DeviceInfo (expect/actual)
+Menampilkan nama perangkat, versi OS, versi aplikasi, dan jenis layar (Smartphone/Tablet) di Settings screen. Implementasi menggunakan `Build.MODEL` dan `Build.VERSION` di Android.
 
-- **`appModule`** (commonMain) — repository, ViewModel, service platform, settings
-- **`androidModule`** (androidMain) — `SqlDriver` untuk Android
+### 3. NetworkMonitor (expect/actual)
+Memonitor koneksi internet secara reaktif menggunakan `ConnectivityManager` di Android. Banner merah animasi muncul otomatis di main screen saat perangkat kehilangan koneksi internet.
 
-### Struktur Direktori
+### 4. BatteryInfo (expect/actual)
+Menampilkan persentase baterai dan status charging di Settings screen, dilengkapi progress bar dengan warna dinamis (hijau > 50%, kuning 20–50%, merah < 20%).
 
-```
-composeApp/src/
-├── androidMain/kotlin/com/muhammadnurikhsan/tugas8_pam/
-│   ├── MainActivity.kt
-│   ├── MyApplication.kt
-│   ├── database/
-│   │   └── DatabaseDriverFactory.kt
-│   ├── di/
-│   │   └── AndroidModule.kt
-│   └── platform/
-│       ├── BatteryInfo.android.kt
-│       ├── DeviceInfo.android.kt
-│       └── NetworkMonitor.android.kt
-└── commonMain/kotlin/com/muhammadnurikhsan/tugas8_pam/
-    ├── App.kt
-    ├── data/
-    │   ├── NoteRepository.kt
-    │   ├── NotesUiState.kt
-    │   └── SettingsRepository.kt
-    ├── di/
-    │   └── AppModule.kt
-    ├── platform/
-    │   ├── BatteryInfo.kt        ← expect class
-    │   ├── DeviceInfo.kt         ← expect class
-    │   └── NetworkMonitor.kt     ← expect class
-    ├── viewmodel/
-    │   ├── NoteViewModel.kt
-    │   └── SettingsViewModel.kt
-    ├── navigation/
-    │   ├── AppNavigation.kt
-    │   └── Screen.kt
-    └── screens/
-        ├── NoteListScreen.kt
-        ├── NoteDetailScreen.kt
-        ├── AddNoteScreen.kt
-        ├── EditNoteScreen.kt
-        ├── FavoritesScreen.kt
-        ├── ProfileScreen.kt
-        └── SettingsScreen.kt
-```
+### 5. Notes List dengan Network Indicator
+Halaman utama catatan dilengkapi banner offline animasi (`AnimatedVisibility`) yang muncul dan menghilang secara otomatis sesuai status koneksi.
+
+### 6. Settings Screen (Device & Status Info)
+Menampilkan informasi perangkat, status internet, status baterai, serta pengaturan tema dan urutan catatan dalam tampilan card yang bersih.
 
 ---
 
 ## Platform API (expect/actual)
 
-### DeviceInfo
 ```kotlin
+// commonMain
 expect class DeviceInfo() {
-    fun getDeviceName(): String   // e.g. "Samsung Galaxy S23"
-    fun getOsVersion(): String    // e.g. "Android 14 (API 34)"
-    fun getAppVersion(): String   // e.g. "1.0"
+    fun getDeviceName(): String
+    fun getOsVersion(): String
+    fun getAppVersion(): String
     fun isTablet(): Boolean
 }
-```
 
-### NetworkMonitor
-```kotlin
 expect class NetworkMonitor() {
     fun isConnected(): Boolean
-    fun observeConnectivity(): Flow<Boolean>  // reactive stream
+    fun observeConnectivity(): Flow<Boolean>
 }
-```
 
-### BatteryInfo
-```kotlin
 expect class BatteryInfo() {
-    fun getBatteryLevel(): Int   // 0–100
+    fun getBatteryLevel(): Int
     fun isCharging(): Boolean
 }
 ```
 
 ---
 
-## Dependency Injection (Koin)
+## Video Demo
 
-### AppModule (commonMain)
-```kotlin
-val appModule = module {
-    single { DeviceInfo() }
-    single { NetworkMonitor() }
-    single { BatteryInfo() }
-    single { Settings() }
-    single { SettingsRepository(get()) }
-    single { NotesDatabase(get()) }
-    single { NoteRepository(get()) }
-    factory { NoteViewModel(get()) }
-    factory { SettingsViewModel(get()) }
-}
-```
-
-### AndroidModule (androidMain)
-```kotlin
-val androidModule = module {
-    single<SqlDriver> {
-        AndroidSqliteDriver(NotesDatabase.Schema, appContext, "notes.db")
-    }
-}
-```
+[Link Video Demo](https://drive.google.com/file/d/xxx/view?usp=sharing)
 
 ---
 
-## Skema Database
+## Screenshot
 
-```sql
-CREATE TABLE NoteEntity (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    title       TEXT    NOT NULL,
-    content     TEXT    NOT NULL,
-    is_favorite INTEGER NOT NULL DEFAULT 0,
-    created_at  INTEGER NOT NULL,
-    updated_at  INTEGER NOT NULL
-);
-```
+### Notes List (Online)
+<!-- Tambahkan screenshot Notes List -->
 
----
+### Notes List (Offline — Banner Merah)
+<!-- Tambahkan screenshot offline banner -->
 
-## Navigasi
+### Settings — Device Info & Battery
+<!-- Tambahkan screenshot Settings -->
 
-| Screen | Route | Deskripsi |
-|---|---|---|
-| NoteListScreen | `note_list` | Halaman utama daftar catatan |
-| FavoritesScreen | `favorites` | Daftar catatan favorit |
-| ProfileScreen | `profile` | Profil mahasiswa |
-| SettingsScreen | `settings` | Pengaturan + info perangkat & baterai |
-| NoteDetailScreen | `note_detail/{noteId}` | Detail catatan |
-| AddNoteScreen | `add_note` | Tambah catatan baru |
-| EditNoteScreen | `edit_note/{noteId}` | Edit catatan |
+### Favorites Screen
+<!-- Tambahkan screenshot Favorites -->
+
+### Profile Screen
+<!-- Tambahkan screenshot Profile -->
 
 ---
 
-## Build & Run
+## Struktur Project
 
-**macOS / Linux:**
-```shell
-./gradlew :composeApp:assembleDebug
 ```
-
-**Windows:**
-```shell
-.\gradlew.bat :composeApp:assembleDebug
+Tugas8_PAM/
+└── composeApp/src/
+    ├── androidMain/kotlin/com/muhammadnurikhsan/tugas8_pam/
+    │   ├── MainActivity.kt
+    │   ├── MyApplication.kt
+    │   ├── di/
+    │   │   └── AndroidModule.kt
+    │   └── platform/
+    │       ├── BatteryInfo.android.kt
+    │       ├── DeviceInfo.android.kt
+    │       └── NetworkMonitor.android.kt
+    └── commonMain/kotlin/com/muhammadnurikhsan/tugas8_pam/
+        ├── App.kt
+        ├── data/
+        │   ├── NoteRepository.kt
+        │   ├── NotesUiState.kt
+        │   └── SettingsRepository.kt
+        ├── di/
+        │   └── AppModule.kt
+        ├── platform/
+        │   ├── BatteryInfo.kt
+        │   ├── DeviceInfo.kt
+        │   └── NetworkMonitor.kt
+        ├── viewmodel/
+        │   ├── NoteViewModel.kt
+        │   └── SettingsViewModel.kt
+        ├── navigation/
+        │   ├── AppNavigation.kt
+        │   └── Screen.kt
+        └── screens/
+            ├── NoteListScreen.kt
+            ├── NoteDetailScreen.kt
+            ├── AddNoteScreen.kt
+            ├── EditNoteScreen.kt
+            ├── FavoritesScreen.kt
+            ├── ProfileScreen.kt
+            └── SettingsScreen.kt
 ```
-
-**Requirement:** Android SDK 24+ (minSdk), target SDK 34. Tidak ada konfigurasi tambahan — langsung build and run.
-
----
-
-## Perbedaan dari Tugas 7
-
-| Aspek | Tugas 7 | Tugas 8 |
-|---|---|---|
-| DI | Manual (`remember { }`) | Koin (`koinViewModel`, `koinInject`) |
-| Driver injection | Lewat parameter `App(driver)` | Koin `androidModule` |
-| Platform API | Tidak ada | DeviceInfo, NetworkMonitor, BatteryInfo |
-| Network indicator | Tidak ada | Banner merah otomatis saat offline |
-| Bottom nav | Flat dark nav bar | Floating pill nav dengan shadow |
-| Tema | Dark theme | Light theme |
-| Application class | Tidak ada | `MyApplication` untuk init Koin |
