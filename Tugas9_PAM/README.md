@@ -67,23 +67,21 @@ Gemini 2.5 Flash API
 ---
 
 ## Video Demo
-[Link Video Demo](https://drive.google.com/file/d/xxx/view?usp=sharing)
+[Link Video Demo]([https://drive.google.com/file/d/xxx/view?usp=sharing](https://drive.google.com/file/d/1ufC-G6ck4oAfW2hGCezex59kJHo8Wcy4/view?usp=sharing))
 
 ---
 
 ## Screenshot
 
 ### AI Chat Screen
-<!-- Tambahkan screenshot AI Chat -->
+<img width="558" height="1280" alt="Image" src="https://github.com/user-attachments/assets/352c2b0d-fe11-473f-8389-fd36607d669e" />
 
 ### Typing Indicator (Loading State)
-<!-- Tambahkan screenshot typing indicator -->
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/4905a113-510a-488e-b38f-9b52c16abab7" />  
 
 ### AI Summarize Note
-<!-- Tambahkan screenshot summarize card -->
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/8ac0f948-d315-4fb8-90ef-8daa921c1586" />
 
-### Error State (Snackbar)
-<!-- Tambahkan screenshot error snackbar -->
 
 ---
 ## Struktur Project
