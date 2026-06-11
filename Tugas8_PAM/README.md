@@ -86,26 +86,23 @@ expect class BatteryInfo() {
 
 ## Video Demo
 
-[Link Video Demo](https://drive.google.com/file/d/xxx/view?usp=sharing)
+[Link Video Demo]([https://drive.google.com/file/d/xxx/view?usp=sharing](https://drive.google.com/file/d/1s1sllJHOSezA2Om-66-q-3r0KVrfvcDQ/view?usp=sharing))
 
 ---
 
 ## Screenshot
 
-### Notes List (Online)
-<!-- Tambahkan screenshot Notes List -->
-
-### Notes List (Offline — Banner Merah)
-<!-- Tambahkan screenshot offline banner -->
+### Notes List 
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/ad8b4ef6-dd66-424c-a142-cf5caeb2579c" />
 
 ### Settings — Device Info & Battery
-<!-- Tambahkan screenshot Settings -->
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/b342b62a-efe3-4883-94f4-ebb1a42af3a1" />
 
 ### Favorites Screen
-<!-- Tambahkan screenshot Favorites -->
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/5c15e287-9305-4ffb-8f60-5d3f18e24933" />
 
 ### Profile Screen
-<!-- Tambahkan screenshot Profile -->
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/00975bc4-7940-42ca-9d37-bbd266aec1aa" />
 
 ---
 
