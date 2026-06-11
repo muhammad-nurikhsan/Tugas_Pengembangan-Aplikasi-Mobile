@@ -76,7 +76,7 @@ Query yang tersedia: `selectAll`, `selectById`, `selectByQuery`, `selectFavorite
 
 ## Video Demo
 
-[Link Video Demo](https://drive.google.com/file/d/xxx/view?usp=sharing)
+[Link Video Demo]([https://drive.google.com/file/d/xxx/view?usp=sharing](https://drive.google.com/file/d/1HEG_EpXg2Crbff0OVOoIbJHYgJkT3JFq/view?usp=sharing))
 
 ---
 
