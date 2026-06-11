@@ -83,19 +83,19 @@ Query yang tersedia: `selectAll`, `selectById`, `selectByQuery`, `selectFavorite
 ## Screenshot
 
 ### Notes List
-<!-- Tambahkan screenshot Notes List -->
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/0c3ad43b-98d8-4189-8ab5-0bb90d322147" />
 
 ### Add Note
-<!-- Tambahkan screenshot Add Note -->
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/a87857ed-2825-43a6-818c-7ece390e9b6d" />
 
 ### Note Detail
-<!-- Tambahkan screenshot Note Detail -->
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/4e2f2d14-a907-45c8-9fbc-5f3a63ccca01" />
 
 ### Favorites Screen
-<!-- Tambahkan screenshot Favorites -->
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/071f6ec7-bf31-4808-ab87-fce2a64df61e" />
 
 ### Settings Screen
-<!-- Tambahkan screenshot Settings -->
+<img width="720" height="1650" alt="Image" src="https://github.com/user-attachments/assets/f637a0ab-dca1-437d-9f46-afa68435589e" />
 
 ---
 
